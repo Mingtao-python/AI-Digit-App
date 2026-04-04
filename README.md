@@ -1,51 +1,56 @@
-# MNIST Training Script
+# MNIST Digit Recognizer App
 
-This repository contains a simple Python script, `mnist_train.py`, that trains and evaluates several machine learning models on the MNIST handwritten digit dataset.
+A Streamlit web application for interactive handwritten digit recognition using a pre-trained CNN model.
 
 ## What it does
 
-`mnist_train.py` performs the following steps:
-
-- Downloads the `mnist_784` dataset from OpenML (if not already cached)
-- Normalizes pixel values to the range `[0, 1]`
-- Splits the data into training and test sets
-- Trains and evaluates:
-  - Logistic Regression
-  - K-Nearest Neighbors (KNN)
-  - Random Forest
-- Applies PCA to reduce dimensionality and trains Logistic Regression again
-- Prints the accuracy of each model and ranks the results
+- Provides a drawing canvas for users to draw digits (0-9)
+- Preprocesses the drawn image (grayscale conversion, thresholding, contour detection, cropping, resizing)
+- Uses a TensorFlow/Keras CNN model to predict the digit
+- Displays the processed image and prediction result
 
 ## Requirements
 
 - Python 3.x
-- `scikit-learn`
+- `streamlit`
+- `numpy`
+- `Pillow`
+- `tensorflow`
+- `opencv-python`
+- `streamlit-drawable-canvas`
+
+## Model File
+
+- `cnn_mnist.keras` — Pre-trained CNN model for digit recognition
+
+## Installation
 
 Install dependencies with:
 
 ```bash
-pip install scikit-learn
+pip install streamlit numpy Pillow tensorflow opencv-python streamlit-drawable-canvas
 ```
 
 ## Usage
 
-Run the script from the repository folder:
+Run the app with:
 
 ```bash
-python mnist_train.py
+streamlit run app.py
 ```
 
-The script may take several minutes the first time it runs because it needs to download the MNIST dataset.
+Then open the provided URL in your browser to use the app.
 
 ## Notes
 
-- If the dataset download fails, the script prints an error message with details.
-- The script uses `train_test_split` with `random_state=42` for reproducible results.
-- PCA is applied with `n_components=50` before retraining Logistic Regression.
+- The CNN model should be trained separately (see `cnn.py` for training code if available).
+- The app uses `streamlit-drawable-canvas` for the drawing interface.
+- Images are processed to 28x28 pixels before prediction.
 
 ## Files
 
-- `mnist_train.py` — main training and evaluation script
+- `app.py` — Main Streamlit application
+- `cnn_mnist.keras` — Pre-trained model file
 
 ## License
 
